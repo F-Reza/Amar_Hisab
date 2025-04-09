@@ -1,4 +1,3 @@
-# amar_hisab
 # আমার হিসাব
 আমার হিসাব - Store Management
 

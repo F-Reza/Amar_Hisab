@@ -12,6 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   provider:
   shimmer:
+  syncfusion_flutter_charts:
 
 dev_dependencies:
   flutter_test:
