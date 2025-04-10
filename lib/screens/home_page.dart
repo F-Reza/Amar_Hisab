@@ -3,7 +3,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 import '../widgets/main_drawer.dart';
-import 'adding_page.dart';
+import 'earning_page.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';
@@ -75,9 +75,9 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: const Text(
-                          'সর্বশেষ আয়\n৪৫৬৪ টাকা',
+                          'সর্বশেষ আয়\n৳ 4334 টাকা',
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 21,
                             color: Colors.white,
                           ),
                         ),
@@ -103,9 +103,9 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: const Text(
-                          'সর্বশেষ ব্যয়\n৩৬৩ টাকা',
+                          'সর্বশেষ ব্যয়\n৳ 675 টাকা',
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 21,
                             color: Colors.white,
                           ),
                         ),
@@ -137,9 +137,9 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: const Text(
-                          'সর্বশেষ বকেয়া\n৬৩৪ টাকা',
+                          'সর্বশেষ বকেয়া\n৳ 345 টাকা',
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 21,
                             color: Colors.white,
                           ),
                         ),
@@ -165,9 +165,9 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: const Text(
-                          'সর্বশেষ প্রফিট\n৩৩৩ টাকা',
+                          'সর্বশেষ প্রফিট\n৳ 645489789 টাকা',
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 21,
                             color: Colors.white,
                           ),
                         ),
