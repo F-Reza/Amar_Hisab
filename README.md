@@ -2,7 +2,6 @@
 আমার হিসাব - Store Management
 
 ## Getting Started
-<img src="https://github.com/F-Reza/Amar_Hisab/blob/main/snap.png" width="100%"> 
 
 This project is a starting point for a Flutter application.
 

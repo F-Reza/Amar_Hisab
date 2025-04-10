@@ -3,6 +3,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 import '../widgets/main_drawer.dart';
+import 'adding_page.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';
@@ -56,37 +57,57 @@ class _HomePageState extends State<HomePage> {
                 spacing: 8,
                 children: [
                   Expanded(
-                    child: Container(
-                      height: 100,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.blueAccent,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: const Text(
-                        'আজকের আয়\n৪৫৬৪ টাকা',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AddEarning(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 100,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.blueAccent,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: const Text(
+                          'সর্বশেষ আয়\n৪৫৬৪ টাকা',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      height: 100,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.redAccent,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: const Text(
-                        'আজকের খরচ\n৩৬৩ টাকা',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AddExpenses(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 100,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: const Text(
+                          'সর্বশেষ ব্যয়\n৩৬৩ টাকা',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -98,37 +119,57 @@ class _HomePageState extends State<HomePage> {
                 spacing: 8,
                 children: [
                   Expanded(
-                    child: Container(
-                      height: 100,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.orangeAccent,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: const Text(
-                        'আজকের বকেয়া\n৬৩৪ টাকা',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AddDues(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 100,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.orangeAccent,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: const Text(
+                          'সর্বশেষ বকেয়া\n৬৩৪ টাকা',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      height: 100,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: const Text(
-                        'আজকের প্রফিট\n৩৩৩ টাকা',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AddProfit(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 100,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: const Text(
+                          'সর্বশেষ প্রফিট\n৩৩৩ টাকা',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
