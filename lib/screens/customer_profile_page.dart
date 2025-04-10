@@ -1,0 +1,565 @@
+import 'package:flutter/material.dart';
+
+class CustomerProfile extends StatefulWidget {
+  const CustomerProfile({super.key});
+
+  @override
+  State<CustomerProfile> createState() => _CustomerProfileState();
+}
+
+class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProviderStateMixin{
+  late TabController _tabController;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _pageController = PageController(initialPage: 0);
+
+    // Sync TabController and PageController
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) {
+        _pageController.animateToPage(
+          _tabController.index,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('কাস্টোমার প্রোফাইল'),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 230,
+              width: MediaQuery.of(context).size.width,
+              // alignment: Alignment.center,
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color:  Colors.grey,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Flexible(
+                    child: const Text(
+                      'নাম : জাহিদুল ইসলাম জাহিদ জাহিদুল ইসলাম জাহিদ',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'মোবাইল নাম্বার : 01712345678',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Text(
+                    'ঠিকানা : ঢাকা, বাংলাদেশ',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Text(
+                    'নিবন্ধন : 10/04/1995',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Divider(),
+                  const Text(
+                    'মোট বাকি : ৳ 5000 টাকা',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Text(
+                    'মোট পরিশোধ : ৳ 5000 টাকা',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Text(
+                    'বকেয়া : ৳ 5000 টাকা',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.brown,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // TabBar without AppBar
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Container(
+              color: Colors.white,
+              child: TabBar(
+                controller: _tabController,
+                physics: const BouncingScrollPhysics(),
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicatorColor: Colors.black,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.black54,
+                dividerColor: Colors.transparent,
+                tabs: [
+                  Tab(text: 'বাকি'),
+                  Tab(text: 'পরিশোধ'),
+                ],
+              ),
+            ),
+          ),
+          // PageView for sliding screens
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                _tabController.index = index;
+              },
+              children: [
+                DuesSection(),
+                PaidSection(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DuesSection extends StatelessWidget {
+  const DuesSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              child: SingleChildScrollView(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 55,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: const Icon(Icons.pending_actions_sharp, color: Colors.orange),
+                      title: const Text('৳ 1000 TK'),
+                      subtitle: const Text('10/04/2025 | 05:30pm'),
+                      trailing: Row(
+                        spacing: 12,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              // Handle edit action
+                            },
+                            child: const Icon(Icons.edit),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF2f59f6),
+        onPressed: () {
+          _showAddIncomeDialog(context);
+        },
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
+    );
+  }
+  // Add this method to your widget class
+  void _showAddIncomeDialog(BuildContext context) {
+    final TextEditingController amountController = TextEditingController();
+    final TextEditingController descriptionController = TextEditingController();
+    DateTime selectedDate = DateTime.now();
+    final formKey = GlobalKey<FormState>();
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+              backgroundColor: Colors.transparent,
+              insetPadding: EdgeInsets.all(20),
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'বাকি যোগ করুন',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Form(
+                      key: formKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextFormField(
+                              controller: amountController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                labelText: 'Amount (৳)',
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter an amount';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            TextField(
+                              controller: descriptionController,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                labelText: 'বিবরণ লিখুন',
+                                border: OutlineInputBorder(),
+                              ),
+                              minLines: 3,
+                              maxLines: 10,
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                const Text("Date:"),
+                                const SizedBox(width: 10),
+                                TextButton(
+                                  onPressed: () async {
+                                    final DateTime? picked = await showDatePicker(
+                                      context: context,
+                                      initialDate: selectedDate,
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime.now(),
+                                    );
+                                    if (picked != null && picked != selectedDate) {
+                                      setState(() {
+                                        selectedDate = picked;
+                                      });
+                                    }
+                                  },
+                                  child: Text(
+                                    "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}",
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.calendar_today),
+                                  onPressed: () async {
+                                    final DateTime? picked = await showDatePicker(
+                                      context: context,
+                                      initialDate: selectedDate,
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime.now(),
+                                    );
+                                    if (picked != null && picked != selectedDate) {
+                                      setState(() {
+                                        selectedDate = picked;
+                                      });
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF2f59f6),
+                          ),
+                          onPressed: () {
+                            // Perform some action
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Save', style: TextStyle(color: Colors.white,)),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+}
+
+class PaidSection extends StatelessWidget {
+  const PaidSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              child: SingleChildScrollView(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 55,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: const Icon(Icons.monetization_on_outlined, color: Colors.green),
+                      title: const Text('৳ 1000 TK'),
+                      subtitle: const Text('10/04/2025 | 05:30pm'),
+                      trailing: Row(
+                        spacing: 12,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              // Handle edit action
+                            },
+                            child: const Icon(Icons.edit),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF2f59f6),
+        onPressed: () {
+          _showAddIncomeDialog(context);
+        },
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
+    );
+  }
+  // Add this method to your widget class
+  void _showAddIncomeDialog(BuildContext context) {
+    final TextEditingController amountController = TextEditingController();
+    final TextEditingController descriptionController = TextEditingController();
+    DateTime selectedDate = DateTime.now();
+    final formKey = GlobalKey<FormState>();
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+              backgroundColor: Colors.transparent,
+              insetPadding: EdgeInsets.all(20),
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'পরিশোধ যোগ করুন',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Form(
+                      key: formKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextFormField(
+                              controller: amountController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                labelText: 'Amount (৳)',
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter an amount';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                const Text("Date:"),
+                                const SizedBox(width: 10),
+                                TextButton(
+                                  onPressed: () async {
+                                    final DateTime? picked = await showDatePicker(
+                                      context: context,
+                                      initialDate: selectedDate,
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime.now(),
+                                    );
+                                    if (picked != null && picked != selectedDate) {
+                                      setState(() {
+                                        selectedDate = picked;
+                                      });
+                                    }
+                                  },
+                                  child: Text(
+                                    "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}",
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.calendar_today),
+                                  onPressed: () async {
+                                    final DateTime? picked = await showDatePicker(
+                                      context: context,
+                                      initialDate: selectedDate,
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime.now(),
+                                    );
+                                    if (picked != null && picked != selectedDate) {
+                                      setState(() {
+                                        selectedDate = picked;
+                                      });
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF2f59f6),
+                          ),
+                          onPressed: () {
+                            // Perform some action
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Save', style: TextStyle(color: Colors.white,)),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+}

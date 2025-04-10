@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../providers/service_provider.dart';
+import 'customer_profile_page.dart';
+
 class AddEarning extends StatelessWidget {
   const AddEarning({super.key});
 
@@ -762,11 +765,45 @@ class AddExpenses extends StatelessWidget {
 }
 
 
-class AddDues extends StatelessWidget {
+class AddDues extends StatefulWidget {
   const AddDues({super.key});
 
   @override
+  State<AddDues> createState() => _AddDuesState();
+}
+
+class _AddDuesState extends State<AddDues> {
+  final _searchController = TextEditingController();
+  bool _isSearching = false;
+  String searchVal = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(() {
+      setState(() {
+        _isSearching = _searchController.text.isNotEmpty;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _clearSearch() {
+    setState(() {
+      _searchController.clear();
+      searchVal = '';
+      _isSearching = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final ServiceProvider provider = ServiceProvider();
     return Scaffold(
       appBar: AppBar(
         title: const Text('বাকির হিসাব'),
@@ -938,6 +975,53 @@ class AddDues extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: SizedBox(
+                height: 44,
+                child: TextField(
+                  controller: _searchController,
+                  keyboardType: TextInputType.text,
+                  style: TextStyle(fontSize: 15),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'খুঁজুন (নাম, মোবাইল)',
+                    labelStyle: TextStyle(fontSize: 15),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10), // Keep the border radius
+                      borderSide: BorderSide.none, // Remove the border color
+                    ),
+                    prefixIcon: Icon(Icons.search, color: Colors.blue, size: 28),
+                    suffixIcon: _isSearching
+                        ? IconButton(
+                      icon: Icon(Icons.clear, color: Colors.grey),
+                      onPressed: _clearSearch,
+                    )
+                        : null,
+                    contentPadding: EdgeInsets.only(top: 8),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      searchVal = value;
+                    });
+                  },
+                ),
+              ),
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
@@ -947,102 +1031,45 @@ class AddDues extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 55,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: const Icon(Icons.pending_actions_outlined, color: Colors.orangeAccent),
-                      title: const Text('৳ 1000 TK'),
-                      subtitle: const Text('10/04/2025 | 05:30pm'),
-                      trailing: Row(
-                        spacing: 12,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Dialog(
-                                    backgroundColor: Colors.transparent,
-                                    insetPadding: EdgeInsets.all(20),
-                                    child: Container(
-                                      width: double.infinity,
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(15),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            blurRadius: 10,
-                                            offset: Offset(0, 4),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            'বিস্তারিত তথ্য',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.blue,
-                                            ),
-                                          ),
-                                          SizedBox(height: 16),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text('Amount: ৳ 1000 TK, ',
-                                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                                              Icon(Icons.arrow_downward_outlined, color: Colors.red),
-                                              Text('10/04/2025 | 05:30pm'),
-                                            ],
-                                          ),
-                                          SizedBox(height: 8),
-                                          Row(
-                                            children: [
-                                              RichText(
-                                                // textAlign: TextAlign.start,
-                                                text: TextSpan(
-                                                  style: DefaultTextStyle.of(context).style,
-                                                  children: [
-                                                    TextSpan(
-                                                      text: 'বিবরণ:\n',
-                                                      style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-                                                    ),
-                                                    TextSpan(
-                                                      text: 'বাবত বিক্রয় ৩৪৩৪৩\nকম্পানি বাবত ৩৪৩৪৩\nব্যাংক বাবত ৩৪৩৪৩',
-                                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(height: 20),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text('Close'),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                              print('Tapped on item $index');
-                            },
-                            child: Icon(Icons.remove_red_eye, color: Colors.blue),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              // Handle edit action
-                            },
-                            child: const Icon(Icons.edit),
-                          ),
-                        ],
+                    return Card(
+                      elevation: 2,
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CustomerProfile(),
+                            ),
+                          );
+                        },
+                        leading: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.blue,
+                          child: const Icon(Icons.person, color: Colors.white),
+                        ),
+                        title: const Text('মোঃ জাহিদুল ইসলাম (জাহিদ)'),
+                        subtitle: const Text('মডেল বাঁজার পশ্চিম পাড়া'),
+                        trailing: Row(
+                          spacing: 12,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                provider.dialCall('01830996044');
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: 50,
+                                height: 32,
+                                decoration: BoxDecoration(
+                                  color: Colors.green[400],
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: Icon(Icons.call, color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -1065,6 +1092,7 @@ class AddDues extends StatelessWidget {
   // Add this method to your widget class
   void _showAddIncomeDialog(BuildContext context) {
     final TextEditingController amountController = TextEditingController();
+    final TextEditingController descriptionController = TextEditingController();
     DateTime selectedDate = DateTime.now();
     final formKey = GlobalKey<FormState>();
 
@@ -1073,118 +1101,121 @@ class AddDues extends StatelessWidget {
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setState) {
-            return AlertDialog(
-              title: const Text('বাকি যোগ করুন',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
-                  )),
-              content: Form(
-                key: formKey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        controller: amountController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Amount (৳)',
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter an amount';
-                          }
-                          return null;
-                        },
+            return Dialog(
+              backgroundColor: Colors.transparent,
+              insetPadding: EdgeInsets.all(20),
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'কাস্টোমার যোগ করুন',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
-                      const SizedBox(height: 16),
-                      TextField(
-                        controller: TextEditingController(),
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          labelText: 'বিবরণ লিখুন',
-                          border: OutlineInputBorder(),
-                        ),
-                        minLines: 3,
-                        maxLines: 10,
-                      ),
-                      Row(
-                        children: [
-                          const Text("Date:"),
-                          const SizedBox(width: 10),
-                          TextButton(
-                            onPressed: () async {
-                              final DateTime? picked = await showDatePicker(
-                                context: context,
-                                initialDate: selectedDate,
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime.now(),
-                              );
-                              if (picked != null && picked != selectedDate) {
-                                setState(() {
-                                  selectedDate = picked;
-                                });
-                              }
-                            },
-                            child: Text(
-                              "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}",
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.blue,
+                    ),
+                    SizedBox(height: 16),
+                    Form(
+                      key: formKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextFormField(
+                              controller: amountController,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                labelText: 'নাম*',
+                                hintText: 'নাম লিখুন',
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'নাম লিখুন';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            TextFormField(
+                              controller: amountController,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                labelText: 'ঠিকানা*',
+                                hintText: 'ঠিকানা লিখুন',
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'নাম লিখুন';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            TextFormField(
+                              controller: amountController,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                labelText: 'মোবাইল',
+                                hintText: 'মোবাইল নাম্বার লিখুন',
+                                border: OutlineInputBorder(),
                               ),
                             ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.calendar_today),
-                            onPressed: () async {
-                              final DateTime? picked = await showDatePicker(
-                                context: context,
-                                initialDate: selectedDate,
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime.now(),
-                              );
-                              if (picked != null && picked != selectedDate) {
-                                setState(() {
-                                  selectedDate = picked;
-                                });
-                              }
-                            },
-                          ),
-                        ],
+                            const SizedBox(height: 16),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF2f59f6),
+                          ),
+                          onPressed: () {
+                            // Perform some action
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Save', style: TextStyle(color: Colors.white,)),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancel'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      final amount = amountController.text;
-                      print('Amount: $amount, Date: $selectedDate');
-                      Navigator.pop(context);
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2f59f6),
-                  ),
-                  child: const Text('Save', style: TextStyle(color: Colors.white)),
-                ),
-              ],
             );
           },
         );
       },
     );
   }
-
 }
 
 
