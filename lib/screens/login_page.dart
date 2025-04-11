@@ -11,7 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final emailController = TextEditingController();
+  final mobileController = TextEditingController();
   final passwordController = TextEditingController();
   bool isObscureText = true;
 
@@ -32,19 +32,23 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset('assets/images/logo.png', height: 150, width: 150,),
+              child: Image.asset('assets/images/logo.png', height: 120, width: 120,),
             ),
+            SizedBox(height: 10,),
+            Text('আপনার একাউন্টে প্রবেশ করুন', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
             SizedBox(height: 20,),
-            Text('আপনার একাউন্টে প্রবেশ করুন', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-            SizedBox(height: 30,),
             SizedBox(
               height: 50,
               child: TextField(
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
+                controller: mobileController,
+                keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(11),
+                ],
                 style: TextStyle(fontSize: 16),
                 decoration: InputDecoration(
-                  labelText: 'ইমেইল লিখুন',
+                  labelText: 'মোবাইল নম্বর',
                   labelStyle: TextStyle(fontSize: 16),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -119,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-            SizedBox(height: 8, ),
+            SizedBox(height: 2, ),
             Container(
               clipBehavior: Clip.antiAliasWithSaveLayer,
               width: double.infinity,
@@ -157,9 +161,9 @@ class _LoginPageState extends State<LoginPage> {
             ),
             TextButton(
               onPressed: () {
-                /*ScaffoldMessenger.of(context).showSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('নিবন্ধন প্রক্রিয়া বন্ধ আছে !....')),
-                );*/
+                );
                 Navigator.pushNamed(context, RegisterPage.routeName);
                 print('Register');
               },
