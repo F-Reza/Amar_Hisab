@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
-
+import '../providers/service_provider.dart';
 import '../widgets/main_drawer.dart';
 import 'earning_page.dart';
+
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final ServiceProvider provider = ServiceProvider();
     return Scaffold(
       drawer: const MainDrawer(),
       appBar: AppBar(
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.auto_graph_outlined),
             onPressed: () {
-              // Handle notification button press
+              _showAddIncomeDialog(context);
             },
           ),
         ],
@@ -223,6 +225,185 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      bottomSheet: Container(
+        height: 50,
+        color: Colors.blueAccent,
+        child: GestureDetector(
+          onTap: () {
+           provider.webLink('www.facebook.com/NextDigitOfficial/');
+          },
+          child: Center(
+            child: Text(
+              'Powered by নেক্সট ডিজিট',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Add this method to your widget class
+  void _showAddIncomeDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+              backgroundColor: Colors.transparent,
+              insetPadding: EdgeInsets.all(20),
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.all(0),
+                      title: Text(
+                        'টোটাল ওভারভিউ',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      leading: Icon(Icons.event_note_rounded),
+                      trailing: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      spacing: 8,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 100,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.blueAccent,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: const Text(
+                              'মোট আয়\n৳ 4334 টাকা',
+                              style: TextStyle(
+                                fontSize: 21,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            height: 100,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: const Text(
+                              'মোট ব্যয়\n৳ 675 টাকা',
+                              style: TextStyle(
+                                fontSize: 21,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      spacing: 8,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 100,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.orangeAccent,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: const Text(
+                              'মোট বকেয়া\n৳ 345 টাকা',
+                              style: TextStyle(
+                                fontSize: 21,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            height: 100,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: const Text(
+                              'মোট প্রফিট\n৳ 645489789 টাকা',
+                              style: TextStyle(
+                                fontSize: 21,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Expanded(
+                      child: Container(
+                        height: 100,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.blueAccent,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: const Text(
+                          'মোট কাস্টমার\n 4334 জন',
+                          style: TextStyle(
+                            fontSize: 21,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 

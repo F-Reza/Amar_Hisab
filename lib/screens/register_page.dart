@@ -1,16 +1,17 @@
-import 'package:amar_hisab/screens/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class LoginPage extends StatefulWidget {
-  static const String routeName = '/login';
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  static const String routeName = '/register';
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
+  final nameController = TextEditingController();
+  final mobileController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isObscureText = true;
@@ -23,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Register'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -35,8 +36,62 @@ class _LoginPageState extends State<LoginPage> {
               child: Image.asset('assets/images/logo.png', height: 150, width: 150,),
             ),
             SizedBox(height: 20,),
-            Text('আপনার একাউন্টে প্রবেশ করুন', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+            Text('আপনার একাউন্ট তৈরি করুন', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
             SizedBox(height: 30,),
+            SizedBox(
+              height: 50,
+              child: TextField(
+                controller: nameController,
+                keyboardType: TextInputType.text,
+                style: TextStyle(fontSize: 16),
+                decoration: InputDecoration(
+                  labelText: 'নাম লিখুন',
+                  labelStyle: TextStyle(fontSize: 16),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: const Color(0xFF2f59f6),),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: const Color(0xFF2f59f6), width: 1.5),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: const Color(0xFF2f59f6), width: 2),
+                  ),
+                  prefixIcon: Icon(Icons.person, color:const Color(0xFF2f59f6),),
+                  contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                ),
+              ),
+            ),
+            SizedBox(height: 15,),
+            SizedBox(
+              height: 50,
+              child: TextField(
+                controller: mobileController,
+                keyboardType: TextInputType.emailAddress,
+                style: TextStyle(fontSize: 16),
+                decoration: InputDecoration(
+                  labelText: ' মোবাইল লিখুন',
+                  labelStyle: TextStyle(fontSize: 16),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: const Color(0xFF2f59f6),),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: const Color(0xFF2f59f6), width: 1.5),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: const Color(0xFF2f59f6), width: 2),
+                  ),
+                  prefixIcon: Icon(Icons.phone_android_sharp, color:const Color(0xFF2f59f6),),
+                  contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                ),
+              ),
+            ),
+            SizedBox(height: 15,),
             SizedBox(
               height: 50,
               child: TextField(
@@ -58,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(color: const Color(0xFF2f59f6), width: 2),
                   ),
-                  prefixIcon: Icon(Icons.phone_android_sharp, color:const Color(0xFF2f59f6),),
+                  prefixIcon: Icon(Icons.email_outlined, color:const Color(0xFF2f59f6),),
                   contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 ),
               ),
@@ -102,24 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    print('Forgotted Password!');
-                  },
-                  child: Text(
-                    'পাসওয়ার্ড ভুলে গেছেন?',
-                    style: TextStyle(
-                      color: Colors.black.withOpacity(0.4),
-                      fontSize: 13,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 8, ),
+            SizedBox(height: 25, ),
             Container(
               clipBehavior: Clip.antiAliasWithSaveLayer,
               width: double.infinity,
@@ -131,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: loginUser,
                 color: const Color(0xFF2f59f6),
                 child: Text(
-                  'প্রবেশ করুন',
+                  'নিবন্ধন করুন',
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.white,
@@ -149,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'আপনার একাউন্ট নেই? ',
+              'আপনার একাউন্ট আছে? ',
               style: TextStyle(
                 color: Colors.black.withOpacity(0.4),
                 fontSize: 13,
@@ -157,14 +195,11 @@ class _LoginPageState extends State<LoginPage> {
             ),
             TextButton(
               onPressed: () {
-                /*ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('নিবন্ধন প্রক্রিয়া বন্ধ আছে !....')),
-                );*/
-                Navigator.pushNamed(context, RegisterPage.routeName);
+                Navigator.pop(context);
                 print('Register');
               },
               child: Text(
-                'নিবন্ধন করুন',
+                'লগইন করুন',
                 style: TextStyle(
                   color: const Color(0xFF2f59f6),
                   fontSize: 13,

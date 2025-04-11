@@ -269,7 +269,7 @@ class DuesSection extends StatelessWidget {
                               },
                             ),
                             const SizedBox(height: 16),
-                            TextField(
+                            TextFormField(
                               controller: descriptionController,
                               keyboardType: TextInputType.text,
                               decoration: const InputDecoration(
@@ -278,6 +278,12 @@ class DuesSection extends StatelessWidget {
                               ),
                               minLines: 3,
                               maxLines: 10,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter a description';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 16),
                             Row(
@@ -346,8 +352,13 @@ class DuesSection extends StatelessWidget {
                             backgroundColor: const Color(0xFF2f59f6),
                           ),
                           onPressed: () {
-                            // Perform some action
-                            Navigator.of(context).pop();
+                            if (formKey.currentState!.validate()) {
+                              // Only proceed if validation passes
+                              print('Amount: ${amountController.text}');
+                              print('Description: ${descriptionController.text}');
+                              print('Date: $selectedDate');
+                              Navigator.of(context).pop();
+                            }
                           },
                           child: Text('Save', style: TextStyle(color: Colors.white,)),
                         ),
@@ -545,8 +556,13 @@ class PaidSection extends StatelessWidget {
                             backgroundColor: const Color(0xFF2f59f6),
                           ),
                           onPressed: () {
-                            // Perform some action
-                            Navigator.of(context).pop();
+                            if (formKey.currentState!.validate()) {
+                              // Only proceed if validation passes
+                              print('Amount: ${amountController.text}');
+                              print('Description: ${descriptionController.text}');
+                              print('Date: $selectedDate');
+                              Navigator.of(context).pop();
+                            }
                           },
                           child: Text('Save', style: TextStyle(color: Colors.white,)),
                         ),

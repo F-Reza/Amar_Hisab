@@ -221,7 +221,7 @@ class AddEarning extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                    color: Colors.black,
                   )),
               content: Form(
                 key: formKey,
@@ -664,11 +664,14 @@ class AddExpenses extends StatelessWidget {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter an amount';
                                 }
+                                if (double.tryParse(value) == null) {
+                                  return 'Please enter a valid number';
+                                }
                                 return null;
                               },
                             ),
                             const SizedBox(height: 16),
-                            TextField(
+                            TextFormField( // Changed from TextField to TextFormField
                               controller: descriptionController,
                               keyboardType: TextInputType.text,
                               decoration: const InputDecoration(
@@ -677,6 +680,12 @@ class AddExpenses extends StatelessWidget {
                               ),
                               minLines: 3,
                               maxLines: 10,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter a description';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 16),
                             Row(
@@ -733,7 +742,7 @@ class AddExpenses extends StatelessWidget {
                       children: [
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog
+                            Navigator.of(context).pop();
                           },
                           child: Text(
                             'Cancel',
@@ -745,10 +754,15 @@ class AddExpenses extends StatelessWidget {
                             backgroundColor: const Color(0xFF2f59f6),
                           ),
                           onPressed: () {
-                            // Perform some action
-                            Navigator.of(context).pop();
+                            if (formKey.currentState!.validate()) {
+                              // Only proceed if validation passes
+                              print('Amount: ${amountController.text}');
+                              print('Description: ${descriptionController.text}');
+                              print('Date: $selectedDate');
+                              Navigator.of(context).pop();
+                            }
                           },
-                          child: Text('Save', style: TextStyle(color: Colors.white,)),
+                          child: Text('Save', style: TextStyle(color: Colors.white)),
                         ),
                       ],
                     ),
@@ -1200,8 +1214,13 @@ class _AddDuesState extends State<AddDues> {
                             backgroundColor: const Color(0xFF2f59f6),
                           ),
                           onPressed: () {
-                            // Perform some action
-                            Navigator.of(context).pop();
+                            if (formKey.currentState!.validate()) {
+                              // Only proceed if validation passes
+                              print('Amount: ${amountController.text}');
+                              print('Description: ${descriptionController.text}');
+                              print('Date: $selectedDate');
+                              Navigator.of(context).pop();
+                            }
                           },
                           child: Text('Save', style: TextStyle(color: Colors.white,)),
                         ),

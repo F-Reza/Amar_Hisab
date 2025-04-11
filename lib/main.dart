@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'screens/home_page.dart';
 import 'screens/launcher_page.dart';
 import 'screens/login_page.dart';
+import 'screens/register_page.dart';
 import 'widgets/main_drawer.dart';
 
 void main() {
@@ -35,9 +36,10 @@ class MyApp extends StatelessWidget {
       ),
 
       // initialRoute: LauncherPage.routeName,
-      initialRoute: HomePage.routeName,
+      initialRoute: LoginPage.routeName,
       routes: {
         LoginPage.routeName : (_) => const LoginPage(),
+        RegisterPage.routeName : (_) => const RegisterPage(),
         MainDrawer.routeName : (_) => const MainDrawer(),
         HomePage.routeName : (_) => const HomePage(),
       },
