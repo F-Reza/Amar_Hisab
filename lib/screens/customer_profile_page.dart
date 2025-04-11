@@ -47,7 +47,6 @@ class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProv
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 230,
               width: MediaQuery.of(context).size.width,
               // alignment: Alignment.center,
               padding: const EdgeInsets.all(16.0),
@@ -59,14 +58,14 @@ class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProv
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(
-                    child: const Text(
-                      'নাম : জাহিদুল ইসলাম জাহিদ জাহিদুল ইসলাম জাহিদ',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
+                  const Text(
+                    'নাম : জাহিদুল ইসলাম জাহিদ জাহিদুল ইসলাম',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),softWrap: true,
+                    maxLines: 2,
+                    overflow: TextOverflow.visible,
                   ),
                   const SizedBox(height: 6),
                   const Text(
@@ -78,13 +77,6 @@ class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProv
                   ),
                   const Text(
                     'ঠিকানা : ঢাকা, বাংলাদেশ',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const Text(
-                    'নিবন্ধন : 10/04/1995',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
@@ -105,6 +97,7 @@ class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProv
                       color: Colors.white,
                     ),
                   ),
+                  Divider(),
                   const Text(
                     'বকেয়া : ৳ 5000 টাকা',
                     style: TextStyle(
@@ -120,15 +113,19 @@ class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProv
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Container(
-              color: Colors.white,
+              color: Colors.blueAccent,
               child: TabBar(
                 controller: _tabController,
                 physics: const BouncingScrollPhysics(),
                 indicatorSize: TabBarIndicatorSize.tab,
-                indicatorColor: Colors.black,
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.black54,
+                indicatorColor: Colors.orangeAccent,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.white54,
                 dividerColor: Colors.transparent,
+                labelStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
                 tabs: [
                   Tab(text: 'বাকি'),
                   Tab(text: 'পরিশোধ'),
@@ -175,13 +172,88 @@ class DuesSection extends StatelessWidget {
                   itemCount: 55,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 8,),
                       leading: const Icon(Icons.pending_actions_sharp, color: Colors.orange),
                       title: const Text('৳ 1000 TK'),
                       subtitle: const Text('10/04/2025 | 05:30pm'),
                       trailing: Row(
-                        spacing: 12,
+                        spacing: 18,
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    insetPadding: EdgeInsets.all(20),
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: EdgeInsets.only(left: 16,
+                                        bottom: 16,),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(15),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            blurRadius: 10,
+                                            offset: Offset(0, 4),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text('10/04/2025 | 05:30pm',
+                                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                              IconButton(
+                                                icon: Icon(Icons.close),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              RichText(
+                                                // textAlign: TextAlign.start,
+                                                text: TextSpan(
+                                                  style: DefaultTextStyle.of(context).style,
+                                                  children: [
+                                                    TextSpan(
+                                                      text: 'বিবরণ:\n',
+                                                      style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+                                                    ),
+                                                    TextSpan(
+                                                      text: 'বাবত বিক্রয় ৩৪৩৪৩\nকম্পানি বাবত ৩৪৩৪৩\nব্যাংক বাবত ৩৪৩৪৩',
+                                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Divider(),
+                                          Text('Amount: ৳ 1000979878 TK',
+                                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                              print('Tapped on item $index');
+                            },
+                            child: Icon(Icons.remove_red_eye, color: Colors.blue),
+                          ),
                           GestureDetector(
                             onTap: () {
                               // Handle edit action
@@ -242,7 +314,7 @@ class DuesSection extends StatelessWidget {
                     Text(
                       'বাকি যোগ করুন',
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -343,24 +415,27 @@ class DuesSection extends StatelessWidget {
                             Navigator.of(context).pop(); // Close the dialog
                           },
                           child: Text(
-                            'Cancel',
+                            'বাতিল',
                             style: TextStyle(color: Colors.red),
                           ),
                         ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF2f59f6),
+                        SizedBox(
+                          height: 36,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF2f59f6),
+                            ),
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                // Only proceed if validation passes
+                                print('Amount: ${amountController.text}');
+                                print('Description: ${descriptionController.text}');
+                                print('Date: $selectedDate');
+                                Navigator.of(context).pop();
+                              }
+                            },
+                            child: Text('যোগ', style: TextStyle(color: Colors.white,)),
                           ),
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              // Only proceed if validation passes
-                              print('Amount: ${amountController.text}');
-                              print('Description: ${descriptionController.text}');
-                              print('Date: $selectedDate');
-                              Navigator.of(context).pop();
-                            }
-                          },
-                          child: Text('Save', style: TextStyle(color: Colors.white,)),
                         ),
                       ],
                     ),
@@ -396,6 +471,7 @@ class PaidSection extends StatelessWidget {
                   itemCount: 55,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 8,),
                       leading: const Icon(Icons.monetization_on_outlined, color: Colors.green),
                       title: const Text('৳ 1000 TK'),
                       subtitle: const Text('10/04/2025 | 05:30pm'),
@@ -463,7 +539,7 @@ class PaidSection extends StatelessWidget {
                     Text(
                       'পরিশোধ যোগ করুন',
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -547,24 +623,27 @@ class PaidSection extends StatelessWidget {
                             Navigator.of(context).pop(); // Close the dialog
                           },
                           child: Text(
-                            'Cancel',
+                            'বাতিল',
                             style: TextStyle(color: Colors.red),
                           ),
                         ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF2f59f6),
+                        SizedBox(
+                          height: 36,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF2f59f6),
+                            ),
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                // Only proceed if validation passes
+                                print('Amount: ${amountController.text}');
+                                print('Description: ${descriptionController.text}');
+                                print('Date: $selectedDate');
+                                Navigator.of(context).pop();
+                              }
+                            },
+                            child: Text('যোগ', style: TextStyle(color: Colors.white,)),
                           ),
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              // Only proceed if validation passes
-                              print('Amount: ${amountController.text}');
-                              print('Description: ${descriptionController.text}');
-                              print('Date: $selectedDate');
-                              Navigator.of(context).pop();
-                            }
-                          },
-                          child: Text('Save', style: TextStyle(color: Colors.white,)),
                         ),
                       ],
                     ),

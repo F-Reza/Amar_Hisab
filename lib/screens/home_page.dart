@@ -3,7 +3,10 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import '../providers/service_provider.dart';
 import '../widgets/main_drawer.dart';
+import 'dues_page.dart';
 import 'earning_page.dart';
+import 'expenses_page.dart';
+import 'profit_page.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -53,7 +56,6 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             spacing: 8,
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
                 spacing: 8,
@@ -71,13 +73,13 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         height: 100,
                         alignment: Alignment.center,
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                           color: Colors.blueAccent,
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Text(
-                          'সর্বশেষ আয়\n৳ 4334 টাকা',
+                          'সর্বশেষ আয়\n৳ 17314 টাকা',
                           style: TextStyle(
                             fontSize: 21,
                             color: Colors.white,
@@ -99,10 +101,10 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         height: 100,
                         alignment: Alignment.center,
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                           color: Colors.redAccent,
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Text(
                           'সর্বশেষ ব্যয়\n৳ 675 টাকা',
@@ -133,10 +135,10 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         height: 100,
                         alignment: Alignment.center,
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                           color: Colors.orangeAccent,
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Text(
                           'সর্বশেষ বকেয়া\n৳ 345 টাকা',
@@ -161,13 +163,13 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         height: 100,
                         alignment: Alignment.center,
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                           color: Colors.green,
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Text(
-                          'সর্বশেষ প্রফিট\n৳ 645489789 টাকা',
+                          'সর্বশেষ প্রফিট\n৳ 65489789 টাকা',
                           style: TextStyle(
                             fontSize: 21,
                             color: Colors.white,
@@ -226,8 +228,8 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomSheet: Container(
-        height: 50,
-        color: Colors.blueAccent,
+        height: 36,
+        color: const Color(0xFF2f59f6),
         child: GestureDetector(
           onTap: () {
            provider.webLink('www.facebook.com/NextDigitOfficial/');
@@ -237,7 +239,7 @@ class _HomePageState extends State<HomePage> {
               'Powered by নেক্সট ডিজিট',
               style: TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
                 color: Colors.white,
               ),
             ),
@@ -249,6 +251,7 @@ class _HomePageState extends State<HomePage> {
 
   // Add this method to your widget class
   void _showAddIncomeDialog(BuildContext context) {
+    final ServiceProvider provider = ServiceProvider();
     showDialog(
       context: context,
       builder: (context) {
@@ -279,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                       title: Text(
                         'টোটাল ওভারভিউ',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -291,7 +294,6 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
-                    SizedBox(height: 8),
                     Row(
                       spacing: 8,
                       children: [
@@ -299,13 +301,13 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             height: 100,
                             alignment: Alignment.center,
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
                               color: Colors.blueAccent,
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Text(
-                              'মোট আয়\n৳ 4334 টাকা',
+                              'মোট আয়\n৳ 433458779',
                               style: TextStyle(
                                 fontSize: 21,
                                 color: Colors.white,
@@ -317,13 +319,13 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             height: 100,
                             alignment: Alignment.center,
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
                               color: Colors.redAccent,
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Text(
-                              'মোট ব্যয়\n৳ 675 টাকা',
+                              'মোট ব্যয়\n৳ 675',
                               style: TextStyle(
                                 fontSize: 21,
                                 color: Colors.white,
@@ -342,13 +344,13 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             height: 100,
                             alignment: Alignment.center,
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
                               color: Colors.orangeAccent,
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Text(
-                              'মোট বকেয়া\n৳ 345 টাকা',
+                              'মোট বকেয়া\n৳ 345',
                               style: TextStyle(
                                 fontSize: 21,
                                 color: Colors.white,
@@ -360,13 +362,13 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             height: 100,
                             alignment: Alignment.center,
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
                               color: Colors.green,
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Text(
-                              'মোট প্রফিট\n৳ 645489789 টাকা',
+                              'মোট প্রফিট\n৳ 645489789',
                               style: TextStyle(
                                 fontSize: 21,
                                 color: Colors.white,
@@ -392,6 +394,38 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             fontSize: 21,
                             color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Version 1.0.0',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                    SizedBox(height: 8),
+                    Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.grey,
+                      ),
+
+                      child: GestureDetector(
+                        onTap: () {
+                          provider.webLink('www.facebook.com/NextDigitOfficial/');
+                        },
+                        child: Center(
+                          child: Text(
+                            'Powered by নেক্সট ডিজিট',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),

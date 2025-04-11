@@ -2,6 +2,8 @@ import 'package:amar_hisab/screens/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'home_page.dart';
+
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
   const LoginPage({super.key});
@@ -16,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   bool isObscureText = true;
 
   void loginUser() async {
-    //
+    Navigator.pushReplacementNamed(context, HomePage.routeName);
   }
 
   @override
@@ -34,9 +36,9 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(10),
               child: Image.asset('assets/images/logo.png', height: 120, width: 120,),
             ),
-            SizedBox(height: 10,),
-            Text('আপনার একাউন্টে প্রবেশ করুন', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
             SizedBox(height: 20,),
+            Text('আপনার একাউন্টে প্রবেশ করুন', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+            SizedBox(height: 15,),
             SizedBox(
               height: 50,
               child: TextField(

@@ -62,9 +62,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 10,),
-              Text('আপনার একাউন্ট তৈরি করুন', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
               SizedBox(height: 20,),
+              Text('আপনার একাউন্ট তৈরি করুন', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+              SizedBox(height: 30,),
               SizedBox(
                 height: 50,
                 child: TextField(

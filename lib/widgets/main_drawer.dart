@@ -69,7 +69,6 @@ class _MainDrawerState extends State<MainDrawer> {
             title: const Text('প্রোফাইল',style: TextStyle(color: Colors.black),),
           ),
           Divider(),
-          SizedBox(height: 5,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
@@ -91,7 +90,6 @@ class _MainDrawerState extends State<MainDrawer> {
             title: Text('গুগল ড্রাইভ',style: TextStyle(color: Colors.black),),
           ),
           Divider(),
-          SizedBox(height: 5,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
@@ -113,7 +111,6 @@ class _MainDrawerState extends State<MainDrawer> {
             title: Text('গুগল ড্রাইভ',style: TextStyle(color: Colors.black),),
           ),
           Divider(),
-          SizedBox(height: 5,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
@@ -130,14 +127,13 @@ class _MainDrawerState extends State<MainDrawer> {
             title: Text('ডাটাবেস এক্সপোর্ট (CSV)',style: TextStyle(color: Colors.black),),
           ),
           Divider(),
-          SizedBox(height: 10,),
           ListTile(
             onTap: () async {
               /*await userProvider.logout();
               Navigator.pushReplacementNamed(context, LauncherPage.routeName);*/
             },
             leading: const Icon(Icons.logout,color: Colors.black,),
-            title: const Text('লগ আউট',style: TextStyle(color: Colors.black),),
+            title: const Text('লগ আউট',style: TextStyle(color: Colors.redAccent),),
           ),
           const SizedBox(height: 10,),
           Column(
@@ -148,7 +144,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black),
+                    color: Colors.blue),
               ),
               Text(
                 'Version 1.0.0',
@@ -159,6 +155,7 @@ class _MainDrawerState extends State<MainDrawer> {
               ),
             ],
           ),
+          const SizedBox(height: 20,),
         ],
       ),
     );
