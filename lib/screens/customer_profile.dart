@@ -41,6 +41,14 @@ class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProv
     return Scaffold(
       appBar: AppBar(
         title: const Text('কাস্টোমার প্রোফাইল'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () {
+              _showEditCustomerDialog(context);
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -148,6 +156,141 @@ class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProv
           ),
         ],
       ),
+    );
+  }
+  // Add this method to your widget class
+  void _showEditCustomerDialog(BuildContext context) {
+    final TextEditingController amountController = TextEditingController();
+    final TextEditingController descriptionController = TextEditingController();
+    DateTime selectedDate = DateTime.now();
+    final formKey = GlobalKey<FormState>();
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+              backgroundColor: Colors.transparent,
+              insetPadding: EdgeInsets.all(20),
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'কাস্টোমার ডাটা পরিবর্তন',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Form(
+                      key: formKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextFormField(
+                              controller: amountController,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                labelText: 'নাম*',
+                                hintText: 'নাম লিখুন',
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'নাম লিখুন';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            TextFormField(
+                              controller: amountController,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                labelText: 'ঠিকানা*',
+                                hintText: 'ঠিকানা লিখুন',
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'নাম লিখুন';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            TextFormField(
+                              controller: amountController,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                labelText: 'মোবাইল',
+                                hintText: 'মোবাইল নাম্বার লিখুন',
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: Text(
+                            'বাতিল',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 36,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blueAccent,
+                            ),
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                // Only proceed if validation passes
+                                print('Amount: ${amountController.text}');
+                                print('Description: ${descriptionController.text}');
+                                print('Date: $selectedDate');
+                                Navigator.of(context).pop();
+                              }
+                            },
+                            child: Text('পরিবর্তন', style: TextStyle(color: Colors.white,)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
@@ -273,14 +416,14 @@ class DuesSection extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF2f59f6),
         onPressed: () {
-          _showAddIncomeDialog(context);
+          _showAddDuesDialog(context);
         },
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
   // Add this method to your widget class
-  void _showAddIncomeDialog(BuildContext context) {
+  void _showAddDuesDialog(BuildContext context) {
     final TextEditingController amountController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
     DateTime selectedDate = DateTime.now();
@@ -498,14 +641,14 @@ class PaidSection extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF2f59f6),
         onPressed: () {
-          _showAddIncomeDialog(context);
+          _showAddPaidDialog(context);
         },
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
   // Add this method to your widget class
-  void _showAddIncomeDialog(BuildContext context) {
+  void _showAddPaidDialog(BuildContext context) {
     final TextEditingController amountController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
     DateTime selectedDate = DateTime.now();

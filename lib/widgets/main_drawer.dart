@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../screens/profile_page.dart';
+import '../screens/admin_profile.dart';
 
 class MainDrawer extends StatefulWidget {
   static const String routeName = '/sidebar';

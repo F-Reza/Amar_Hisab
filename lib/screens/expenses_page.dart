@@ -271,7 +271,7 @@ class AddExpenses extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF2f59f6),
         onPressed: () {
-          _showAddIncomeDialog(context);
+          _showAddExpensesDialog(context);
         },
         child: const Icon(Icons.add, color: Colors.white),
       ),
@@ -279,7 +279,7 @@ class AddExpenses extends StatelessWidget {
   }
 
   // Add this method to your widget class
-  void _showAddIncomeDialog(BuildContext context) {
+  void _showAddExpensesDialog(BuildContext context) {
     final TextEditingController amountController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
     DateTime selectedDate = DateTime.now();

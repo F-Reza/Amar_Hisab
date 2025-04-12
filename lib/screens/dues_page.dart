@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../providers/service_provider.dart';
-import 'customer_page.dart';
+import 'customer_profile.dart';
 
 class AddDues extends StatefulWidget {
   const AddDues({super.key});
@@ -320,7 +320,7 @@ class _AddDuesState extends State<AddDues> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF2f59f6),
         onPressed: () {
-          _showAddIncomeDialog(context);
+          _showAddNewCustomerDialog(context);
         },
         child: const Icon(Icons.add, color: Colors.white),
       ),
@@ -328,7 +328,7 @@ class _AddDuesState extends State<AddDues> {
   }
 
   // Add this method to your widget class
-  void _showAddIncomeDialog(BuildContext context) {
+  void _showAddNewCustomerDialog(BuildContext context) {
     final TextEditingController amountController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
     DateTime selectedDate = DateTime.now();
