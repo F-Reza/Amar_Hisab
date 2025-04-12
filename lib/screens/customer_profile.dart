@@ -67,7 +67,7 @@ class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProv
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'নাম : জাহিদুল ইসলাম জাহিদ জাহিদুল ইসলাম',
+                    'নাম : ফারহান মোর্শেদ',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
@@ -77,14 +77,14 @@ class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProv
                   ),
                   const SizedBox(height: 6),
                   const Text(
-                    'মোবাইল নাম্বার : 01712345678',
+                    'মোবাইল নাম্বার : 01830996044',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
                     ),
                   ),
                   const Text(
-                    'ঠিকানা : ঢাকা, বাংলাদেশ',
+                    'ঠিকানা : পঞ্চগড় সদর, পঞ্চগড়',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
@@ -92,14 +92,14 @@ class _CustomerProfileState extends State<CustomerProfile> with SingleTickerProv
                   ),
                   Divider(),
                   const Text(
-                    'মোট বাকি : ৳ 5000 টাকা',
+                    'মোট বাকি : ৳ 15000 টাকা',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
                     ),
                   ),
                   const Text(
-                    'মোট পরিশোধ : ৳ 5000 টাকা',
+                    'মোট পরিশোধ : ৳ 10000 টাকা',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,

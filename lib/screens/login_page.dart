@@ -18,7 +18,8 @@ class _LoginPageState extends State<LoginPage> {
   bool isObscureText = true;
 
   void loginUser() async {
-    if (mobileController.text.isEmpty) {
+    Navigator.pushReplacementNamed(context, HomePage.routeName);
+    /*if (mobileController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('মোবাইল নম্বর লিখুন')),
       );
@@ -32,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
       );
     } else {
       Navigator.pushReplacementNamed(context, HomePage.routeName);
-    }
+    }*/
 
   }
 
@@ -40,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('লগইন'),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -198,9 +199,9 @@ class _LoginPageState extends State<LoginPage> {
             ),
             TextButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
+                /*ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('নিবন্ধন প্রক্রিয়া বন্ধ আছে !....')),
-                );
+                );*/
                 Navigator.pushNamed(context, RegisterPage.routeName);
                 print('Register');
               },

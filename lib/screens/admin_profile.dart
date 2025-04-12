@@ -82,11 +82,11 @@ class ProfilePage extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'নাম: Ataur Rahman',
+                          'নাম: ফারহান মোর্শেদ',
                           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Text('মোবাইল: 01830996044', style: TextStyle(fontSize: 16)),
-                        Text('ইমেইল: marahman@gmail.com', style: TextStyle(fontSize: 16)),
+                        Text('ইমেইল: nextdigirpro@gmail.com', style: TextStyle(fontSize: 16)),
                         SizedBox(height: 5),
                         Text('নিবন্ধনের তারিখ: 11/04/2025 | 04:55pm', style: TextStyle(fontSize: 16,color: Colors.black54)),
                       ],

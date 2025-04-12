@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/admin_profile.dart';
+import '../screens/login_page.dart';
 
 class MainDrawer extends StatefulWidget {
   static const String routeName = '/sidebar';
@@ -33,7 +34,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'Ataur Rahman',
+                  'Farhan Morshed',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -47,7 +48,7 @@ class _MainDrawerState extends State<MainDrawer> {
                       color: Colors.white),
                 ),
                 Text(
-                  'marahman@gmail.com',
+                  'nextdigirpro@gmail.com',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -126,11 +127,12 @@ class _MainDrawerState extends State<MainDrawer> {
           const ListTile(
             //onTap: () => Navigator.pushNamed(context, QrScanner.routeName),
             leading: Icon(Icons.file_download_rounded,color: Colors.black,),
-            title: Text('ডাটাবেস এক্সপোর্ট (CSV)',style: TextStyle(color: Colors.black),),
+            title: Text('ডাটা এক্সপোর্ট (CSV)',style: TextStyle(color: Colors.black),),
           ),
           Divider(),
           ListTile(
             onTap: () async {
+              Navigator.pushReplacementNamed(context, LoginPage.routeName);
               /*await userProvider.logout();
               Navigator.pushReplacementNamed(context, LauncherPage.routeName);*/
             },

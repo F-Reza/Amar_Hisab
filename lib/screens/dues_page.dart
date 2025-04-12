@@ -285,8 +285,8 @@ class _AddDuesState extends State<AddDues> {
                           backgroundColor: Colors.blue,
                           child: const Icon(Icons.person, color: Colors.white),
                         ),
-                        title: const Text('মোঃ জাহিদুল ইসলাম (জাহিদ)'),
-                        subtitle: const Text('মডেল বাঁজার পশ্চিম পাড়া'),
+                        title: const Text('মোঃ ফারহান মোর্শেদ'),
+                        subtitle: const Text('পঞ্চগড় সদর, পঞ্চগড়'),
                         trailing: Row(
                           spacing: 12,
                           mainAxisSize: MainAxisSize.min,
