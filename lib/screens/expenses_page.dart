@@ -345,13 +345,13 @@ class AddExpenses extends StatelessWidget {
                             const SizedBox(height: 16),
                             TextFormField( // Changed from TextField to TextFormField
                               controller: descriptionController,
-                              keyboardType: TextInputType.text,
+                              keyboardType: TextInputType.multiline,
                               decoration: const InputDecoration(
                                 labelText: 'বিবরণ লিখুন',
                                 border: OutlineInputBorder(),
                               ),
                               minLines: 3,
-                              maxLines: 10,
+                              maxLines: 6,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter a description';
@@ -425,7 +425,7 @@ class AddExpenses extends StatelessWidget {
                           height: 36,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2f59f6),
+                              backgroundColor: Colors.blueAccent,
                             ),
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
@@ -436,7 +436,7 @@ class AddExpenses extends StatelessWidget {
                                 Navigator.of(context).pop();
                               }
                             },
-                            child: Text('যোগ', style: TextStyle(color: Colors.white)),
+                            child: Text('সেভ', style: TextStyle(color: Colors.white)),
                           ),
                         ),
                       ],

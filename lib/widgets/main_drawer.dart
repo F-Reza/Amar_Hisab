@@ -57,11 +57,13 @@ class _MainDrawerState extends State<MainDrawer> {
               ],
             ),
           ),
-          ListTile(
-            // onTap: () => Navigator.pushNamed(context, IndexScreen.routeName),
-            onTap: () => Navigator.pop(context),
-            leading: const Icon(Icons.home,color: Colors.black,),
-            title: const Text('হোম',style: TextStyle(color: Colors.black),),
+          SizedBox(
+            height: 46,
+            child: ListTile(
+              onTap: () => Navigator.pop(context),
+              leading: const Icon(Icons.home,color: Colors.black,),
+              title: const Text('হোম',style: TextStyle(color: Colors.black),),
+            ),
           ),
           ListTile(
             onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage())),

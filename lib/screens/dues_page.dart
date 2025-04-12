@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../providers/service_provider.dart';
-import 'customer_profile_page.dart';
+import 'customer_page.dart';
 
 class AddDues extends StatefulWidget {
   const AddDues({super.key});
@@ -437,7 +437,7 @@ class _AddDuesState extends State<AddDues> {
                           height: 36,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2f59f6),
+                              backgroundColor: Colors.blueAccent,
                             ),
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
@@ -448,7 +448,7 @@ class _AddDuesState extends State<AddDues> {
                                 Navigator.of(context).pop();
                               }
                             },
-                            child: Text('যোগ', style: TextStyle(color: Colors.white,)),
+                            child: Text('সেভ', style: TextStyle(color: Colors.white,)),
                           ),
                         ),
                       ],

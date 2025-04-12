@@ -343,13 +343,13 @@ class DuesSection extends StatelessWidget {
                             const SizedBox(height: 16),
                             TextFormField(
                               controller: descriptionController,
-                              keyboardType: TextInputType.text,
+                              keyboardType: TextInputType.multiline,
                               decoration: const InputDecoration(
                                 labelText: 'বিবরণ লিখুন',
                                 border: OutlineInputBorder(),
                               ),
                               minLines: 3,
-                              maxLines: 10,
+                              maxLines: 6,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter a description';
@@ -423,7 +423,7 @@ class DuesSection extends StatelessWidget {
                           height: 36,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2f59f6),
+                              backgroundColor: Colors.blueAccent,
                             ),
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
@@ -434,7 +434,7 @@ class DuesSection extends StatelessWidget {
                                 Navigator.of(context).pop();
                               }
                             },
-                            child: Text('যোগ', style: TextStyle(color: Colors.white,)),
+                            child: Text('সেভ', style: TextStyle(color: Colors.white,)),
                           ),
                         ),
                       ],
@@ -631,7 +631,7 @@ class PaidSection extends StatelessWidget {
                           height: 36,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2f59f6),
+                              backgroundColor: Colors.blueAccent,
                             ),
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
@@ -642,7 +642,7 @@ class PaidSection extends StatelessWidget {
                                 Navigator.of(context).pop();
                               }
                             },
-                            child: Text('যোগ', style: TextStyle(color: Colors.white,)),
+                            child: Text('সেভ', style: TextStyle(color: Colors.white,)),
                           ),
                         ),
                       ],

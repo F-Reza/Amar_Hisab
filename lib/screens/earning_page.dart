@@ -306,9 +306,9 @@ class AddEarning extends StatelessWidget {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF2f59f6),
+                      backgroundColor: Colors.blueAccent
                     ),
-                    child: const Text('যোগ', style: TextStyle(color: Colors.white)),
+                    child: const Text('সেভ', style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ],
