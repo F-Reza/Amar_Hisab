@@ -22,24 +22,15 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('মোবাইল নম্বর লিখুন')),
       );
-    }
-    else if (mobileController.text.length != 11) {
+    } else if (mobileController.text.length != 11) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('সঠিক মোবাইল নম্বর লিখুন')),
       );
-    }
-
-    else if (passwordController.text.isEmpty) {
+    } else if (passwordController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('পাসওয়ার্ড লিখুন')),
       );
-    }
-    else if (passwordController.text.length < 6) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('পাসওয়ার্ড ৬ অক্ষরের বেশি হতে হবে')),
-      );
-    }
-    else {
+    } else {
       Navigator.pushReplacementNamed(context, HomePage.routeName);
     }
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'home_page.dart';
+
 class RegisterPage extends StatefulWidget {
   static const String routeName = '/register';
   const RegisterPage({super.key});
@@ -16,8 +18,30 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   bool isObscureText = true;
 
-  void loginUser() async {
-    //
+  void registerUser() async {
+    if (mobileController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('মোবাইল নম্বর লিখুন')),
+      );
+    } else if (mobileController.text.length != 11) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('সঠিক মোবাইল নম্বর লিখুন')),
+      );
+    } else if (emailController.text.length != 11) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('ইমেইল লিখুন')),
+      );
+    } else if (passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('পাসওয়ার্ড লিখুন')),
+      );
+    } else if (passwordController.text.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('পাসওয়ার্ড ৬ অক্ষরের বেশি হতে হবে')),
+      );
+    } else {
+      Navigator.pushReplacementNamed(context, HomePage.routeName);
+    }
   }
 
   @override
@@ -197,7 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: MaterialButton(
-                  onPressed: loginUser,
+                  onPressed: registerUser,
                   color: const Color(0xFF2f59f6),
                   child: Text(
                     'নিবন্ধন করুন',
